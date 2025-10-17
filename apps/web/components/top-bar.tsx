@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
@@ -62,30 +62,55 @@ export default function TopBar() {
             <WalletUsdcBalance />
 
             <ConnectButton.Custom>
-              {({ account, chain, openAccountModal, openConnectModal, mounted }) => {
-                const ready = mounted
-                const connected = ready && account && chain
-
-                if (!connected) {
-                  return (
-                    <button
-                      type="button"
-                      onClick={openConnectModal}
-                      className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow hover:bg-primary/90"
-                    >
-                      Connect Wallet
-                    </button>
-                  )
-                }
+              {({
+                account,
+                chain,
+                authenticationStatus,
+                mounted,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+              }) => {
+                const ready = mounted && authenticationStatus !== "loading"
+                const connected = ready && account && chain && (!authenticationStatus || authenticationStatus === "authenticated")
 
                 return (
-                  <button
-                    type="button"
-                    onClick={openAccountModal}
-                    className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-semibold text-zinc-200 shadow"
+                  <div
+                    {...(!ready && {
+                      "aria-hidden": true,
+                      style: {
+                        opacity: 0,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                      } as CSSProperties,
+                    })}
                   >
-                    {account.displayName}
-                  </button>
+                    {!connected ? (
+                      <button
+                        type="button"
+                        onClick={() => openConnectModal?.()}
+                        className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow hover:bg-primary/90"
+                      >
+                        Connect Wallet
+                      </button>
+                    ) : chain?.unsupported ? (
+                      <button
+                        type="button"
+                        onClick={() => openChainModal?.()}
+                        className="flex items-center gap-2 rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground shadow hover:bg-destructive/90"
+                      >
+                        Wrong network
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => openAccountModal?.()}
+                        className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-semibold text-zinc-200 shadow"
+                      >
+                        {account.displayName}
+                      </button>
+                    )}
+                  </div>
                 )
               }}
             </ConnectButton.Custom>
