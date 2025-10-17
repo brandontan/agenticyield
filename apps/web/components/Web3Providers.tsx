@@ -8,7 +8,9 @@ import { connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { walletConnectWallet, coinbaseWallet, metaMaskWallet, rainbowWallet } from "@rainbow-me/rainbowkit/wallets"
 import { base, baseSepolia } from "wagmi/chains"
 
-const walletConnectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID ?? "8cda37f721a07c70116a85ae9be325bf"
+const rawWalletConnectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID ?? "8cda37f721a07c70116a85ae9be325bf"
+const walletConnectId = rawWalletConnectId.trim()
+const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://v0-agentic-yield-ui.vercel.app").replace(/\/$/, "")
 
 const transports = {
   [base.id]: http(process.env.NEXT_PUBLIC_BASE_RPC || base.rpcUrls.default.http[0]),
@@ -22,21 +24,25 @@ if (projectId === "demo") {
   console.warn("WalletConnect projectId missing; QR connect will be disabled. Set NEXT_PUBLIC_WALLETCONNECT_ID.")
 }
 
-const connectors = connectorsForWallets(
-  [
-    {
-      groupName: "Recommended",
-      wallets: [walletConnectWallet, coinbaseWallet, metaMaskWallet, rainbowWallet],
-    },
-  ],
+const walletList = [
   {
-    projectId,
-    appName: "AgenticYield",
-    appDescription: "We move your USDC to the place that pays more after costs, with safety checks and clear receipts.",
-    appUrl: "https://v0-agentic-yield-ui.vercel.app",
-    appIcon: "https://v0-agentic-yield-ui.vercel.app/placeholder-logo.png",
-  }
-)
+    groupName: "Recommended",
+    wallets: [
+      walletConnectWallet({ projectId }),
+      coinbaseWallet({ appName: "AgenticYield" }),
+      metaMaskWallet({ projectId }),
+      rainbowWallet({ projectId }),
+    ],
+  },
+] as unknown as Parameters<typeof connectorsForWallets>[0]
+
+const connectors = connectorsForWallets(walletList, {
+  projectId,
+  appName: "AgenticYield",
+  appDescription: "We move your USDC to the place that pays more after costs, with safety checks and clear receipts.",
+  appUrl,
+  appIcon: `${appUrl}/placeholder-logo.png`,
+})
 
 const wagmiConfig = createConfig({
   connectors,
