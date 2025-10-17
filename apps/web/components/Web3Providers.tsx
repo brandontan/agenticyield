@@ -25,17 +25,12 @@ if (projectId === "demo") {
 }
 
 function buildConnectors(metadataUrl: string) {
-  const walletList = [
+  const walletList: Parameters<typeof connectorsForWallets>[0] = [
     {
       groupName: "Recommended",
-      wallets: [
-        walletConnectWallet({ projectId }),
-        coinbaseWallet({ appName: "AgenticYield" }),
-        metaMaskWallet({ projectId }),
-        rainbowWallet({ projectId }),
-      ],
+      wallets: [walletConnectWallet, coinbaseWallet, metaMaskWallet, rainbowWallet],
     },
-  ] as unknown as Parameters<typeof connectorsForWallets>[0]
+  ]
 
   return connectorsForWallets(walletList, {
     projectId,
