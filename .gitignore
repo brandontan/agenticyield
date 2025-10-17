@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+.next
+.DS_Store
+.turbo
+**/tsconfig.tsbuildinfo
+.env.local
+.env*
+dist
+coverage
+out
+forge-cache
+cache
+broadcast
+preclone-agenticyield-backup
+.vercel

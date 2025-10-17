@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    { "path": "apps/web" }
+  ],
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/web/*"],
+      "@agenticyield/ui/*": ["packages/ui/src/*"],
+      "@agenticyield/sdk/*": ["packages/sdk/src/*"]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "agenticyield",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.18.3",
+  "scripts": {
+    "preinstall": "corepack prepare pnpm@10.18.3 --activate",
+    "dev": "pnpm --filter @agenticyield/web dev",
+    "build": "pnpm --filter @agenticyield/web build",
+    "lint": "pnpm --filter @agenticyield/web lint",
+    "typecheck": "pnpm --filter @agenticyield/web typecheck",
+    "test": "pnpm --filter @agenticyield/web test"
+  },
+  "devDependencies": {
+    "turbo": "^1.13.4"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
