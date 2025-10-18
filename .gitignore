@@ -6,6 +6,7 @@ node_modules
 **/tsconfig.tsbuildinfo
 .env.local
 .env*
+!.env.example
 dist
 coverage
 out

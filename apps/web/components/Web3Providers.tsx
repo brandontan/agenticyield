@@ -8,21 +8,15 @@ import { connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { walletConnectWallet, coinbaseWallet, metaMaskWallet, rainbowWallet } from "@rainbow-me/rainbowkit/wallets"
 import { base, baseSepolia } from "wagmi/chains"
 
-const rawWalletConnectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID ?? "8cda37f721a07c70116a85ae9be325bf"
-const walletConnectId = rawWalletConnectId.trim()
-const configuredAppUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://v0-agentic-yield-ui.vercel.app").trim().replace(/\/$/, "")
+import { publicEnv } from "@/lib/env"
 
 const transports = {
   [base.id]: http(process.env.NEXT_PUBLIC_BASE_RPC || base.rpcUrls.default.http[0]),
   [baseSepolia.id]: http(process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC || baseSepolia.rpcUrls.default.http[0]),
 }
 
-const projectId = walletConnectId || "demo"
+const projectId = publicEnv.walletConnectProjectId
 const chains = [base, baseSepolia] as const
-
-if (projectId === "demo") {
-  console.warn("WalletConnect projectId missing; QR connect will be disabled. Set NEXT_PUBLIC_WALLETCONNECT_ID.")
-}
 
 function buildConnectors(metadataUrl: string) {
   const walletList: Parameters<typeof connectorsForWallets>[0] = [
@@ -52,7 +46,7 @@ export default function Web3Providers({ children }: Web3ProvidersProps) {
     if (typeof window !== "undefined") {
       return window.location.origin
     }
-    return configuredAppUrl
+    return publicEnv.appUrl
   }, [])
 
   const wagmiConfig = useMemo(() => {

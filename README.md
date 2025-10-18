@@ -54,6 +54,7 @@ NEXT_PUBLIC_CHAIN=base
 ALCHEMY_KEY=
 USDC_ADDRESS_BASE=
 VAULT_ADDRESS_BASE=
+NEXT_PUBLIC_WALLETCONNECT_ID=
 
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=
@@ -67,6 +68,8 @@ REDIS_URL=
 RAYS_THRESHOLD_BPS=50
 AUTO_MANAGE_DEFAULT=false
 ```
+
+- `NEXT_PUBLIC_WALLETCONNECT_ID` is your WalletConnect Cloud project ID (32 hexadecimal characters). Generate it in the WalletConnect dashboard, add the production/staging domains to the allowlist, then set it via `cp .env.example .env.local` locally and `vercel env pull` / `vercel env add NEXT_PUBLIC_WALLETCONNECT_ID` for deployments. Never commit the value to git.
 
 ### Supabase Data Model
 - `users(id, email, created_at)`

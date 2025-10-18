@@ -15,7 +15,11 @@
   - Deliver kill switch, allocation caps, and proof of allocation events.
 
 4. **Security Hardening & Monitoring**
-   - Integrate Auditor pipeline, OTel metrics, and incident ingestion into the runner.
-   - Ensure CI runs Slither, Semgrep, Echidna (target coverage ≥90%).
+  - Integrate Auditor pipeline, OTel metrics, and incident ingestion into the runner.
+  - Ensure CI runs Slither, Semgrep, Echidna (target coverage ≥90%).
+
+5. **WalletConnect Remediation (Spec 2025-10-18-walletconnect-remediation)**
+  - Remove revoked project IDs, validate env configuration, and document rotation steps.
+  - Evidence: `.codex-os/specs/2025-10-18-walletconnect-remediation/*`, updated `Web3Providers`.
 
 Roadmap entries are updated via `.codex-os/instructions/core/plan-product.md` whenever we plan new milestones.
