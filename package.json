@@ -6,10 +6,11 @@
   "scripts": {
     "preinstall": "corepack prepare pnpm@10.18.3 --activate",
     "dev": "pnpm --filter @agenticyield/web dev",
-    "build": "pnpm --filter @agenticyield/web build",
-    "lint": "pnpm --filter @agenticyield/web lint",
-    "typecheck": "pnpm --filter @agenticyield/web typecheck",
-    "test": "pnpm --filter @agenticyield/web test"
+    "dev:relayer": "pnpm --filter @agenticyield/relayer dev",
+    "build": "pnpm --filter @agenticyield/web build && pnpm --filter @agenticyield/relayer build",
+    "lint": "pnpm --filter @agenticyield/web lint && pnpm --filter @agenticyield/relayer lint",
+    "typecheck": "pnpm --filter @agenticyield/web typecheck && pnpm --filter @agenticyield/relayer typecheck",
+    "test": "pnpm --filter @agenticyield/web test && pnpm --filter @agenticyield/relayer test"
   },
   "devDependencies": {
     "turbo": "^1.13.4"

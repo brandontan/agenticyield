@@ -22,4 +22,8 @@
   - Remove revoked project IDs, validate env configuration, and document rotation steps.
   - Evidence: `.codex-os/specs/2025-10-18-walletconnect-remediation/*`, updated `Web3Providers`.
 
+6. **Gas-Sponsored First Deposit (Spec 2025-10-18-gas-sponsored-deposit)**
+  - Launch meta-transaction relayer, sponsored deposit UX, and policy enforcement/observability.
+  - Evidence: `.codex-os/specs/2025-10-18-gas-sponsored-deposit/*`, relayer deployment docs, Supabase table.
+
 Roadmap entries are updated via `.codex-os/instructions/core/plan-product.md` whenever we plan new milestones.

@@ -71,6 +71,19 @@ AUTO_MANAGE_DEFAULT=false
 
 - `NEXT_PUBLIC_WALLETCONNECT_ID` is your WalletConnect Cloud project ID (32 hexadecimal characters). Generate it in the WalletConnect dashboard, add the production/staging domains to the allowlist, then set it via `cp .env.example .env.local` locally and `vercel env pull` / `vercel env add NEXT_PUBLIC_WALLETCONNECT_ID` for deployments. Never commit the value to git.
 
+### Relayer Variables
+- `RELAYER_RPC`: Base mainnet RPC used for simulation + submission.
+- `RELAYER_PRIVATE_KEY`: Gas account that pays for sponsored deposits (keep out of git).
+- `VAULT_ADDRESS`: AgentVault contract receiving deposits.
+- `USDC_BASE`: Base USDC token contract.
+- `MAX_SPONSORED_USDC`, `RISK_FLOOR`, `VENUE_CAP_PCT`, `SLIPPAGE_MAX_PCT`, `COOLDOWN_HOURS`, `RATE_LIMIT_PER_IP`, `SPONSOR_ON`: Policy switches documented in the spec.
+
+### Relayer Service
+- Install deps: `pnpm install`
+- Start dev server: `pnpm --filter @agenticyield/relayer dev`
+- Run tests: `pnpm --filter @agenticyield/relayer test`
+- Build (future deploy): `pnpm --filter @agenticyield/relayer build`
+
 ### Supabase Data Model
 - `users(id, email, created_at)`
 - `wallets(id, user_id, chain, address, primary bool)`
