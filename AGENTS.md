@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Start Here
-- Read `HANDOFF-2025-10-18.md` for today.
+- Read `HANDOFF-2025-10-20.md` for today.
 - Memory pointer: `mcp://memory/namespace/item-or-note-id`.
 - Follow `.codex-os/` workflows and specs.
 
